@@ -27,6 +27,8 @@ if [[ $? == 0 ]]; then
             echo -n "Make some adjustments..."
             cp ../$CURRENT_VERSION/server.properties .
             cp ../$CURRENT_VERSION/eula.txt .
+            cp -a ../$CURRENT_VERSION/local .
+            cp ../$CURRENT_VERSION/*.json .
             if [ -f ../$CURRENT_VERSION/post-update.sh ]; then
                 source ../$CURRENT_VERSION/post-update.sh
                 cp ../$CURRENT_VERSION/post-update.sh .
