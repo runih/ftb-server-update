@@ -1,4 +1,9 @@
 #!/bin/bash
+which jq > /dev/null 2>&1
+if [ $? != 0 ]; then
+    echo "ERROR: $0 require 'jq' to be installed  !!!"
+    exit 1
+fi
 CURRENT_PATH=$(pwd)
 MODPACK=$(jq ".parent" version.json)
 if [[ $? == 0 ]]; then
