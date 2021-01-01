@@ -18,3 +18,7 @@ You can use post-update.sh if you have made some changes in the modpack which yo
 cp ../$CURRENT_VERSION/start.sh .
 cp ../$CURRENT_VERSION/config/rats-common.toml config/
 ```
+
+## Requirements
+
+The package `jq` needs to be installed for `update-modpack.sh` to work!
