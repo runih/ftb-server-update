@@ -6,6 +6,11 @@ if [ $? != 0 ]; then
 fi
 CURRENT_PATH=$(pwd)
 MODPACK=$(jq ".parent" version.json)
+if [ "$(uname)" == "Darwin" ]; then
+	OS="mac"
+else
+	OS="linux"
+fi
 if [[ $? == 0 ]]; then
     CURRENTID=$(jq ".id" version.json)
     NEWID=$(curl -s https://api.modpacks.ch/public/modpack/$(jq ".parent" version.json) | jq ".versions[] | select(.id > $(jq '.id' version.json)) | select(.type == \"Release\")" | jq ".id" | sort | tail -n1)
@@ -25,7 +30,7 @@ if [[ $? == 0 ]]; then
         fi
         mkdir ../$NEW_VERSION
         cd ../$NEW_VERSION 
-        curl -o $FILENAME https://api.modpacks.ch/public/modpack/$MODPACK/$NEWID/server/linux
+        curl -o $FILENAME https://api.modpacks.ch/public/modpack/$MODPACK/$NEWID/server/$OS
         chmod u+x $FILENAME
         ./$FILENAME
         if [[ $? == 0 ]]; then
