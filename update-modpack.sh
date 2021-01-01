@@ -33,7 +33,7 @@ if [[ $? == 0 ]]; then
             cp ../$CURRENT_VERSION/server.properties .
             cp ../$CURRENT_VERSION/eula.txt .
             cp -a ../$CURRENT_VERSION/local .
-            cp ../$CURRENT_VERSION/*.json .
+            cp ../$CURRENT_VERSION/[b,o,u,w]*.json .
             if [ -f ../$CURRENT_VERSION/post-update.sh ]; then
                 source ../$CURRENT_VERSION/post-update.sh
                 cp ../$CURRENT_VERSION/post-update.sh .
