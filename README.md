@@ -21,4 +21,4 @@ cp ../$CURRENT_VERSION/config/rats-common.toml config/
 
 ## Requirements
 
-The package `jq` needs to be installed for `update-modpack.sh` to work!
+The package `curl` and `jq` needs to be installed for `update-modpack.sh` to work!
