@@ -1,4 +1,9 @@
 #!/bin/bash
+which curl > /dev/null 2>&1
+if [ $? != 0 ]; then
+	echo "ERROR: $0 require 'curl' to be installed !!!"
+	exit 1
+fi
 which jq > /dev/null 2>&1
 if [ $? != 0 ]; then
     echo "ERROR: $0 require 'jq' to be installed  !!!"
