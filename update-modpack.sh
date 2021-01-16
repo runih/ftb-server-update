@@ -18,7 +18,7 @@ else
 fi
 if [[ $? == 0 ]]; then
     CURRENTID=$(jq ".id" version.json)
-    NEWID=$(curl -s https://api.modpacks.ch/public/modpack/$(jq ".parent" version.json) | jq ".versions[] | select(.id > $(jq '.id' version.json)) | select(.type == \"Release\")" | jq ".id" | sort | tail -n1)
+    NEWID=$(curl -s https://api.modpacks.ch/public/modpack/$(jq ".parent" version.json) | jq ".versions[] | select(.id > $(jq '.id' version.json)) | select(.type | ascii_downcase == \"release\")" | jq ".id" | sort | tail -n1)
     if [[ "$NEWID" == "" ]]; then
         echo "There is no new version"
     else
