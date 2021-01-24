@@ -1,8 +1,8 @@
 #!/bin/bash
 which curl > /dev/null 2>&1
 if [ $? != 0 ]; then
-	echo "ERROR: $0 require 'curl' to be installed !!!"
-	exit 1
+    echo "ERROR: $0 require 'curl' to be installed !!!"
+    exit 1
 fi
 which jq > /dev/null 2>&1
 if [ $? != 0 ]; then
@@ -12,9 +12,9 @@ fi
 CURRENT_PATH=$(pwd)
 MODPACK=$(jq ".parent" version.json)
 if [ "$(uname)" == "Darwin" ]; then
-	OS="mac"
+    OS="mac"
 else
-	OS="linux"
+    OS="linux"
 fi
 if [[ $? == 0 ]]; then
     CURRENTID=$(jq ".id" version.json)
@@ -39,26 +39,26 @@ if [[ $? == 0 ]]; then
         chmod u+x $FILENAME
         ./$FILENAME
         if [[ $? == 0 ]]; then
-	    echo -n "Copy world..."
+            echo -n "Copy world..."
             cp -a ../$CURRENT_VERSION/world .
-	    echo "Done"
+            echo "Done"
             echo -n "Copy essential files from the current version..."
             cp ../$CURRENT_VERSION/server.properties .
             cp ../$CURRENT_VERSION/eula.txt .
             cp -a ../$CURRENT_VERSION/local .
             cp ../$CURRENT_VERSION/[b,o,u,w]*.json .
             sed -i "s/$CURRENT_VERSION/$NEW_VERSION/" server.properties
-	    echo "Done"
+            echo "Done"
             if [ -f ../$CURRENT_VERSION/post-update.sh ]; then
-		echo -n "Run post script..."
+                echo -n "Run post script..."
                 source ../$CURRENT_VERSION/post-update.sh
                 cp ../$CURRENT_VERSION/post-update.sh .
-		echo "Done"
+                echo "Done"
             fi
-	    echo -n "Cleanup..."
+            echo -n "Cleanup..."
             rm $FILENAME
-	    chmod u+x start.sh
-	    echo "Done"
+            chmod u+x start.sh
+            echo "Done"
         else
             echo "No new version"
         fi
