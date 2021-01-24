@@ -39,19 +39,26 @@ if [[ $? == 0 ]]; then
         chmod u+x $FILENAME
         ./$FILENAME
         if [[ $? == 0 ]]; then
-            echo -n "Make some adjustments..."
+	    echo -n "Copy world..."
+            cp -a ../$CURRENT_VERSION/world .
+	    echo "Done"
+            echo -n "Copy essential files from the current version..."
             cp ../$CURRENT_VERSION/server.properties .
             cp ../$CURRENT_VERSION/eula.txt .
             cp -a ../$CURRENT_VERSION/local .
             cp ../$CURRENT_VERSION/[b,o,u,w]*.json .
+            sed -i "s/$CURRENT_VERSION/$NEW_VERSION/" server.properties
+	    echo "Done"
             if [ -f ../$CURRENT_VERSION/post-update.sh ]; then
+		echo -n "Run post script..."
                 source ../$CURRENT_VERSION/post-update.sh
                 cp ../$CURRENT_VERSION/post-update.sh .
+		echo "Done"
             fi
-            cp -a ../$CURRENT_VERSION/world .
-            sed -i "s/$CURRENT_VERSION/$NEW_VERSION/" server.properties
+	    echo -n "Cleanup..."
             rm $FILENAME
-            echo "Done"
+	    chmod u+x start.sh
+	    echo "Done"
         else
             echo "No new version"
         fi
